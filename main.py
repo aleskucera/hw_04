@@ -179,6 +179,7 @@ def evaluate(model, metrics, loader, device, verbose=True, create_imgs=False, sa
 
 
 def train(model, metrics, train_loader, device, optimizer, loss_fn, verbose=True):
+    model.to(device)
     for i, data in enumerate(train_loader):
         x = data['rgbs'].to(device)
         y = data['labels'].to(device)
@@ -222,10 +223,10 @@ def main():
     train_loader = tdata.DataLoader(train_ds, batch_size=args.batch_size, shuffle=True)
     val_loader = tdata.DataLoader(val_ds, batch_size=args.batch_size, shuffle=False)
 
-    model = load_model()[0].to(device)
+    model = load_model()[0]
 
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
-    loss_fn = torch.nn.CrossEntropyLoss(weight=WEIGHTS)
+    loss_fn = torch.nn.CrossEntropyLoss(weight=WEIGHTS.to(device))
     metrics = Metrics(NUM_CLAZZ, WEIGHTS, CLAZZ)
 
     limit = 0
