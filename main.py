@@ -10,7 +10,7 @@ import torch
 import torch.utils.data as tdata
 from PIL import Image
 
-from hw_04 import load_model, UnetFromPretrained
+from hw_04 import load_model
 
 BORDER = 10
 COLORS_CLAZZ = (
@@ -213,8 +213,8 @@ def main():
     args = parse_args()
     path = './data/hw_04'
 
-    # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    device = torch.device('cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # device = torch.device('cpu')
 
     train_ds = Dataset(os.path.join(path, 'train/rgbs.npy'), os.path.join(path, 'train/labels.npy'))
     val_ds = Dataset(os.path.join(path, 'val/labels.npy'), os.path.join(path, 'val/labels.npy'))
@@ -239,7 +239,7 @@ def main():
 
         if metrics.miou > limit:
             limit = metrics.miou
-            torch.save(model.state_dict(), 'model.pth')
+            torch.save(model.state_dict(), f'unet_{limit}.pth')
             print('Model saved')
 
 
