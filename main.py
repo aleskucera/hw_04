@@ -212,7 +212,7 @@ def parse_args():
 
 def main():
     args = parse_args()
-    path = './data/hw_04'
+    path = '/mnt/personal/kuceral4/hw_04'
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     # device = torch.device('cpu')
