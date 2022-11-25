@@ -229,7 +229,7 @@ def main():
     metrics = Metrics(NUM_CLAZZ, WEIGHTS, CLAZZ)
 
     limit = 0
-    epochs = 50
+    epochs = 100
 
     for epoch in range(epochs):
         print(f'Epoch {epoch + 1:02d}')
