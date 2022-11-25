@@ -13,4 +13,5 @@
 # Change limit for opened files
 ulimit -n 100000
 
-singularity run --nv singularity/deep_learning_image.sif python main.py --batch_size=32
+#singularity run --nv singularity/deep_learning_image.sif python main.py --batch_size=32
+singularity run --nv -B /mnt/personal/kuceral4 singularity/deep_learning_image.sif python main.py --batch_size=8
