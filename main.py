@@ -32,10 +32,10 @@ COLORS_OK = np.array(((255, 0, 0, 100), (0, 255, 0, 100))) / 255
 
 # Constants about problem
 CLAZZ = ['Background & Buildings', 'Car', 'Humans & Bikes', 'Interest', 'Sky', 'Nature']
-# WEIGHTS = np.array([0, 1, 1, 1, 0, 0])
+WEIGHTS = np.array([1, 1, 1, 1, 1, 1])
 NUM_CLAZZ = len(CLAZZ)
 OCCURRENCES = torch.tensor([0.24060006, 0.08469768, 0.00358836, 0.24668484, 0.20268513, 0.22174393])
-WEIGHTS = 1 / OCCURRENCES
+TRAIN_WEIGHTS = 1 / OCCURRENCES
 
 
 class Dataset(tdata.Dataset):
@@ -228,7 +228,7 @@ def main():
     model = load_model()[0]
 
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
-    loss_fn = torch.nn.CrossEntropyLoss(weight=WEIGHTS.to(device))
+    loss_fn = torch.nn.CrossEntropyLoss(weight=TRAIN_WEIGHTS.to(device))
     metrics = Metrics(NUM_CLAZZ, WEIGHTS, CLAZZ)
 
     limit = 0
@@ -238,7 +238,7 @@ def main():
         print(f'Epoch {epoch + 1:02d}')
         train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
         metrics.reset()
-        evaluate(model, metrics, val_loader, device, args.verbose, args.create_imgs, args.store_dir)
+        metrics = evaluate(model, metrics, val_loader, device, args.verbose, args.create_imgs, args.store_dir)
 
         if metrics.miou > limit:
             limit = metrics.miou
