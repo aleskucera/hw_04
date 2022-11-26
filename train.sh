@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --nodes=1                         # 1 node
-#SBATCH --ntasks-per-node=32             # 64 tasks per node
-#SBATCH --time=1:00:00                    # time limits: 8 hours
+#SBATCH --ntasks-per-node=32              # 64 tasks per node
+#SBATCH --time=3:00:00                    # time limits: 8 hours
 #SBATCH --error=myJob.err                 # standard error file
 #SBATCH --output=myJob.out                # standard output file
 #SBATCH --partition=amdgpu                # partition name
