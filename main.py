@@ -249,7 +249,7 @@ def main():
 
         if metrics.miou > max_iou:
             max_iou = metrics.miou
-            torch.save(model.state_dict(), f'new_unet_{max_iou}.pth')
+            torch.save(model.state_dict(), f'best_unet_{max_iou}.pth')
             print('Model saved')
 
         metrics.reset()
