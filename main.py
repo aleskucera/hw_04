@@ -11,7 +11,7 @@ import torch.utils.data as tdata
 from PIL import Image
 from tqdm import tqdm
 
-from hw_04 import load_model
+from hw_4 import load_model
 
 BORDER = 10
 COLORS_CLAZZ = (
@@ -32,9 +32,10 @@ COLORS_OK = np.array(((255, 0, 0, 100), (0, 255, 0, 100))) / 255
 
 # Constants about problem
 CLAZZ = ['Background & Buildings', 'Car', 'Humans & Bikes', 'Interest', 'Sky', 'Nature']
-np.array([0, 1, 1, 1, 0, 0])
+WEIGHTS = np.array([0, 1, 1, 1, 0, 0])
 NUM_CLAZZ = len(CLAZZ)
-OCCURRENCES = torch.tensor([0.24060006, 0.08469768, 0.00358836, 0.24668484, 0.20268513, 0.22174393])
+OCCURRENCES = torch.tensor(
+    [10 * 0.24060006, 0.08469768, 0.4 * 0.00358836, 0.24668484, 10 * 0.20268513, 10 * 0.22174393])
 TRAIN_WEIGHTS = 1 / OCCURRENCES
 
 
@@ -242,13 +243,13 @@ def main():
 
     for epoch in range(epochs):
         print(f'Epoch {epoch + 1:02d}')
-        metrics = train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
-        metrics.reset()
+        # metrics = train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
+        # metrics.reset()
         metrics = evaluate(model, metrics, val_loader, device, args.verbose, args.create_imgs, args.store_dir)
 
         if metrics.miou > max_iou:
             max_iou = metrics.miou
-            torch.save(model.state_dict(), f'unet_{max_iou}.pth')
+            torch.save(model.state_dict(), f'new_unet_{max_iou}.pth')
             print('Model saved')
 
         metrics.reset()

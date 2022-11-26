@@ -41,12 +41,9 @@ def load_model() -> Tuple[nn.Module, str]:
     vgg19_bn = tv.models.vgg19_bn(True)
     num_classes = 6
     model = UnetFromPretrained(vgg19_bn.features, num_classes)
-    # model.load_state_dict(torch.load(f'best_model.pth', map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load(f'unet_0.7891678389344641.pth', map_location=torch.device('cpu')))
     encoder_name = 'vgg19_bn'
     return model, encoder_name
-
-
-
 
 
 def create_features(input_encoder: nn.Module) -> (nn.Module, nn.Module, int):
@@ -104,6 +101,7 @@ def decoder_sequential(decoder_modules: list):
         modules.append(nn.ReLU(inplace=True))
 
     return nn.Sequential(*modules)
+
 
 class Print(nn.Module):
     def __init__(self):
