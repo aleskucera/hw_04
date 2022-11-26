@@ -243,8 +243,8 @@ def main():
 
     for epoch in range(epochs):
         print(f'Epoch {epoch + 1:02d}')
-        # metrics = train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
-        # metrics.reset()
+        metrics = train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
+        metrics.reset()
         metrics = evaluate(model, metrics, val_loader, device, args.verbose, args.create_imgs, args.store_dir)
 
         if metrics.miou > max_iou:
