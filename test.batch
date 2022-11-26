@@ -1,0 +1,10 @@
+#!/bin/sh
+#SBATCH --partition=cpu
+#SBATCH --time=1
+
+/bin/hostname
+srun -l /bin/hostname
+srun -l /bin/pwd
+
+singularity run --nv -B /mnt/personal/kuceral4 singularity/deep_learning_image.sif ls -l
+
