@@ -174,7 +174,7 @@ def evaluate(model, metrics, loader, device, verbose=True, create_imgs=False, sa
                     os.makedirs(save_dir, exist_ok=True)
                     img.save(osp.join(save_dir, f'{img_id:04d}.png'))
             print(f'Processed {i / len(loader) * 100:.2f}% of validation data')
-
+    print('Validation finished')
     metrics.print_final()
     return metrics
 
@@ -196,6 +196,9 @@ def train(model, metrics, train_loader, device, optimizer, loss_fn, verbose=True
             metrics.update(y, y_pred, verbose)
         if i % 50 == 0:
             print(f'Processed {i / len(train_loader) * 100:.2f}% of training data')
+    print('Training metrics')
+    metrics.print_final()
+    return metrics
 
 
 def parse_args():
@@ -236,7 +239,7 @@ def main():
 
     for epoch in range(epochs):
         print(f'Epoch {epoch + 1:02d}')
-        train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
+        metrics = train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
         metrics.reset()
         metrics = evaluate(model, metrics, val_loader, device, args.verbose, args.create_imgs, args.store_dir)
 
