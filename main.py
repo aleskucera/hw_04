@@ -101,6 +101,7 @@ class Metrics:
             weights = np.copy(self.weights)
             weights[np.isnan(ious)] = 0
             miou = np.ma.average(ious, weights=weights)
+            self.miou = miou
         return precisions, recalls, ious, weights, miou
 
     def _print_stats(self, cm, precisions, recalls, ious, weights, miou):
@@ -127,6 +128,7 @@ class Metrics:
         self.tps = np.zeros(self.num_classes, dtype='u8')
         self.fps = np.zeros(self.num_classes, dtype='u8')
         self.fns = np.zeros(self.num_classes, dtype='u8')
+        self.miou = None
 
 
 def create_vis(rgb, label, prediction):
@@ -247,6 +249,8 @@ def main():
             limit = metrics.miou
             torch.save(model.state_dict(), f'unet_{limit}.pth')
             print('Model saved')
+
+        metrics.reset()
 
 
 if __name__ == '__main__':
