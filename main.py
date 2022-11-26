@@ -35,7 +35,7 @@ CLAZZ = ['Background & Buildings', 'Car', 'Humans & Bikes', 'Interest', 'Sky', '
 WEIGHTS = np.array([0, 1, 1, 1, 0, 0])
 NUM_CLAZZ = len(CLAZZ)
 OCCURRENCES = torch.tensor(
-    [10 * 0.24060006, 0.08469768, 0.4 * 0.00358836, 0.24668484, 10 * 0.20268513, 10 * 0.22174393])
+    [1.5 * 0.24060006, 0.08469768, 0.5 * 0.00358836, 0.24668484, 1.5 * 0.20268513, 1.5 * 0.22174393])
 TRAIN_WEIGHTS = 1 / OCCURRENCES
 
 
