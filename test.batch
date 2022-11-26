@@ -1,5 +1,5 @@
 #!/bin/sh
-#SBATCH --partition=cpu
+#SBATCH --partition=amdcpu
 #SBATCH --time=1
 
 /bin/hostname
