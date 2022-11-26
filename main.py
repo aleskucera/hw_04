@@ -9,6 +9,7 @@ import scipy.sparse
 import torch
 import torch.utils.data as tdata
 from PIL import Image
+from tqdm import tqdm
 
 from hw_04 import load_model
 
@@ -180,7 +181,7 @@ def evaluate(model, metrics, loader, device, verbose=True, create_imgs=False, sa
 
 def train(model, metrics, train_loader, device, optimizer, loss_fn, verbose=True):
     model.to(device)
-    for i, data in enumerate(train_loader):
+    for i, data in enumerate(tqdm(train_loader)):
         x = data['rgbs'].to(device)
         y = data['labels'].to(device)
         y_pred = model.forward(x)
@@ -212,6 +213,7 @@ def parse_args():
 
 def main():
     args = parse_args()
+    # path = 'data/hw_04'
     path = '/mnt/personal/kuceral4/hw_04'
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
