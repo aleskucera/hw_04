@@ -213,11 +213,11 @@ def parse_args():
 
 def main():
     args = parse_args()
-    path = 'data/hw_04'
-    # path = '/mnt/personal/kuceral4/hw_04'
+    # path = 'data/hw_04'
+    path = '/mnt/personal/kuceral4/hw_04'
 
-    # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    device = torch.device('cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # device = torch.device('cpu')
 
     train_ds = Dataset(os.path.join(path, 'train/rgbs.npy'), os.path.join(path, 'train/labels.npy'))
     val_ds = Dataset(os.path.join(path, 'val/rgbs.npy'), os.path.join(path, 'val/labels.npy'))
