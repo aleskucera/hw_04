@@ -6,7 +6,6 @@
 #SBATCH --error=myJob.err                 # standard error file
 #SBATCH --output=myJob.out                # standard output file
 #SBATCH --partition=amd                # partition name
-#SBATCH --gres=gpu:1                      # number of GPUs per node
 #SBATCH --mail-user=kuceral4@fel.cvut.cz  # where send info about job
 #SBATCH --mail-type=ALL                   # what to send, valid type values are NONE, BEGIN, END, FAIL, REQUEUE, ALL
 
