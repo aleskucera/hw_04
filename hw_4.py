@@ -41,7 +41,7 @@ def load_model() -> Tuple[nn.Module, str]:
     vgg19_bn = tv.models.vgg19_bn(True)
     num_classes = 6
     model = UnetFromPretrained(vgg19_bn.features, num_classes)
-    model.load_state_dict(torch.load(f'unet_0.7891678389344641.pth', map_location=torch.device('cpu')))
+    # model.load_state_dict(torch.load(f'unet_0.7891678389344641.pth', map_location=torch.device('cpu')))
     encoder_name = 'vgg19_bn'
     return model, encoder_name
 
