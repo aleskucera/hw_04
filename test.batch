@@ -15,5 +15,5 @@ srun -l /bin/hostname
 srun -l /bin/pwd
 nvidia-smi
 
-#singularity run --nv singularity/deep_learning_image.sif python test.py
+singularity run --nv singularity/deep_learning_image.sif python test.py
 
