@@ -1,10 +1,10 @@
 #!/bin/sh
-#SBATCH --partition=amdcpu
+#SBATCH --partition=amdgpu
 #SBATCH --time=1
 
 /bin/hostname
 srun -l /bin/hostname
 srun -l /bin/pwd
 
-singularity run --nv -B /mnt/personal/kuceral4 singularity/deep_learning_image.sif ls -l
+singularity run --nv singularity/deep_learning_image.sif python test.py
 
