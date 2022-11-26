@@ -232,11 +232,12 @@ def main():
 
     model = load_model()[0]
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+    parameters = list(model.decoder.parameters()) + list(model.classifier.parameters())
+    optimizer = torch.optim.Adam(parameters, lr=1e-3)
     loss_fn = torch.nn.CrossEntropyLoss(weight=TRAIN_WEIGHTS.to(device))
     metrics = Metrics(NUM_CLAZZ, WEIGHTS, CLAZZ)
 
-    limit = 0
+    max_iou = 0
     epochs = 100
 
     for epoch in range(epochs):
@@ -245,9 +246,9 @@ def main():
         metrics.reset()
         metrics = evaluate(model, metrics, val_loader, device, args.verbose, args.create_imgs, args.store_dir)
 
-        if metrics.miou > limit:
-            limit = metrics.miou
-            torch.save(model.state_dict(), f'unet_{limit}.pth')
+        if metrics.miou > max_iou:
+            max_iou = metrics.miou
+            torch.save(model.state_dict(), f'unet_{max_iou}.pth')
             print('Model saved')
 
         metrics.reset()
