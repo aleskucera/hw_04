@@ -32,7 +32,7 @@ COLORS_OK = np.array(((255, 0, 0, 100), (0, 255, 0, 100))) / 255
 
 # Constants about problem
 CLAZZ = ['Background & Buildings', 'Car', 'Humans & Bikes', 'Interest', 'Sky', 'Nature']
-WEIGHTS = np.array([1, 1, 1, 1, 1, 1])
+np.array([0, 1, 1, 1, 0, 0])
 NUM_CLAZZ = len(CLAZZ)
 OCCURRENCES = torch.tensor([0.24060006, 0.08469768, 0.00358836, 0.24668484, 0.20268513, 0.22174393])
 TRAIN_WEIGHTS = 1 / OCCURRENCES
