@@ -234,8 +234,8 @@ def main():
     model = load_model()[0]
 
     parameters = list(model.decoder.parameters()) + list(model.classifier.parameters())
-    optimizer = torch.optim.Adam(parameters, lr=1e-3)
-    loss_fn = torch.nn.CrossEntropyLoss(weight=TRAIN_WEIGHTS.to(device))
+    # optimizer = torch.optim.Adam(parameters, lr=1e-3)
+    # loss_fn = torch.nn.CrossEntropyLoss(weight=TRAIN_WEIGHTS.to(device))
     metrics = Metrics(NUM_CLAZZ, WEIGHTS, CLAZZ)
 
     max_iou = 0
