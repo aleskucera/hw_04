@@ -239,11 +239,12 @@ def main():
     metrics = Metrics(NUM_CLAZZ, WEIGHTS, CLAZZ)
 
     max_iou = 0
-    epochs = 100
+    epochs = 1
 
     for epoch in range(epochs):
         print(f'Epoch {epoch + 1:02d}')
-        metrics = train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
+        # metrics = train(model, metrics, train_loader, device, optimizer, loss_fn, args.verbose)
+        metrics = evaluate(model, metrics, train_loader, device, args.verbose, args.create_imgs, args.store_dir)
         metrics.reset()
         metrics = evaluate(model, metrics, val_loader, device, args.verbose, args.create_imgs, args.store_dir)
 
